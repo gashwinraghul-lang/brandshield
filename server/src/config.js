@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const dotenv = require('dotenv');
 
 const ROOT_DIR = path.resolve(__dirname, '..', '..');
+const IS_VERCEL = process.env.VERCEL === '1';
 
 for (const envFile of [path.join(ROOT_DIR, '.env'), path.join(ROOT_DIR, 'server', '.env')]) {
   if (fs.existsSync(envFile)) dotenv.config({ path: envFile });
@@ -14,28 +15,32 @@ function resolveFromRoot(value, fallback) {
 }
 
 function parseDatabaseUrl(raw) {
-  const value = (raw || 'sqlite:./data/brandshield.db').trim();
+  const fallbackPath = IS_VERCEL ? '/tmp/brandshield.db' : './data/brandshield.db';
+  const value = (raw || `sqlite:${fallbackPath}`).trim();
   if (value === ':memory:' || value === 'sqlite::memory:') return { dialect: 'sqlite', location: ':memory:' };
   if (value.startsWith('sqlite:')) {
-    return { dialect: 'sqlite', location: resolveFromRoot(value.slice('sqlite:'.length), './data/brandshield.db') };
+    return { dialect: 'sqlite', location: resolveFromRoot(value.slice('sqlite:'.length), fallbackPath) };
   }
   if (value.startsWith('postgres://') || value.startsWith('postgresql://')) {
     return { dialect: 'postgres', location: value };
   }
-  return { dialect: 'sqlite', location: resolveFromRoot(value, './data/brandshield.db') };
+  return { dialect: 'sqlite', location: resolveFromRoot(value, fallbackPath) };
 }
 
 const database = parseDatabaseUrl(process.env.BRANDSHIELD_DB_URL);
+
+const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+const defaultOrigin = vercelUrl || 'http://localhost:5173';
 
 const config = {
   rootDir: ROOT_DIR,
   nodeEnv: process.env.NODE_ENV || 'development',
   port: Number(process.env.BRANDSHIELD_PORT || 4100),
-  webOrigin: process.env.BRANDSHIELD_WEB_ORIGIN || 'http://localhost:5173',
-  publicUrl: (process.env.BRANDSHIELD_PUBLIC_URL || process.env.BRANDSHIELD_WEB_ORIGIN || 'http://localhost:5173').replace(/\/$/, ''),
+  webOrigin: process.env.BRANDSHIELD_WEB_ORIGIN || defaultOrigin,
+  publicUrl: (process.env.BRANDSHIELD_PUBLIC_URL || process.env.BRANDSHIELD_WEB_ORIGIN || defaultOrigin).replace(/\/$/, ''),
   database,
   sessionDays: Number(process.env.BRANDSHIELD_SESSION_DAYS || 7),
-  uploadDir: resolveFromRoot(process.env.BRANDSHIELD_UPLOAD_DIR, './data/uploads'),
+  uploadDir: resolveFromRoot(process.env.BRANDSHIELD_UPLOAD_DIR, IS_VERCEL ? '/tmp/uploads' : './data/uploads'),
   maxUploadBytes: Number(process.env.BRANDSHIELD_MAX_UPLOAD_MB || 10) * 1024 * 1024,
   llm: {
     provider: (process.env.BRANDSHIELD_LLM_PROVIDER || 'auto').toLowerCase(),
