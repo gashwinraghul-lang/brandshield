@@ -1,0 +1,105 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4px, 1vw, 10px);
+  height: 150px;
+  padding-top: 8px;
+}
+
+.compact {
+  height: 110px;
+}
+
+.column {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.track {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(246, 239, 228, 0.02), rgba(246, 239, 228, 0.06));
+  overflow: hidden;
+}
+
+.stack {
+  width: 100%;
+  min-height: 2px;
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 6px 6px 2px 2px;
+  overflow: hidden;
+  transition: height var(--transition);
+}
+
+.stack span {
+  display: block;
+  width: 100%;
+}
+
+.blocker {
+  background: linear-gradient(180deg, #ff9a8d, #e85b49);
+}
+
+.warning {
+  background: linear-gradient(180deg, #f7cf84, #d9a23b);
+}
+
+.suggestion {
+  background: linear-gradient(180deg, #8fe0d4, #3fa89c);
+}
+
+.week {
+  font-size: 0.62rem;
+  color: var(--parchment-faint);
+  text-align: center;
+  white-space: nowrap;
+  min-height: 14px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.7rem;
+  color: var(--parchment-dim);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.blockerKey {
+  background: #f07a67;
+}
+
+.warningKey {
+  background: #efc267;
+}
+
+.suggestionKey {
+  background: #6fd2c5;
+}

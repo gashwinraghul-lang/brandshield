@@ -1,0 +1,127 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.statLabel {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--parchment-faint);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.15;
+}
+
+.danger {
+  color: var(--blocker);
+}
+
+.warn {
+  color: var(--warning);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.queueList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.queueCard {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: rgba(246, 239, 228, 0.03);
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.queueCard:hover {
+  border-color: rgba(255, 160, 125, 0.3);
+  background: rgba(246, 239, 228, 0.05);
+  transform: translateY(-1px);
+}
+
+.queueMain {
+  min-width: 0;
+}
+
+.queueTop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.queueTitle {
+  margin-top: 8px;
+  font-size: 1.22rem;
+}
+
+.queueMeta {
+  margin-top: 4px;
+  font-size: 0.76rem;
+  color: var(--parchment-faint);
+}
+
+.excerpt {
+  margin-top: 8px;
+  font-size: 0.84rem;
+  color: var(--parchment-dim);
+  max-width: 80ch;
+  overflow-wrap: anywhere;
+}
+
+.queueActions {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+@media (max-width: 1180px) {
+  .filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .queueCard {
+    flex-direction: column;
+  }
+
+  .queueActions {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

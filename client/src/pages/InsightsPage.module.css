@@ -1,0 +1,249 @@
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tile::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: var(--glass-border);
+}
+
+.danger::after {
+  background: var(--blocker);
+}
+
+.warn::after {
+  background: var(--warning);
+}
+
+.ok::after {
+  background: var(--ok);
+}
+
+.tileLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--parchment-faint);
+}
+
+.tileValue {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.1;
+}
+
+.tileNote {
+  font-size: 0.72rem;
+  color: var(--parchment-dim);
+}
+
+.topGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.pulseSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.pulseSummary > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pulseSummary strong {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.clarityList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clarityList li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(246, 239, 228, 0.08);
+}
+
+.clarityList li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.clarityMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clarityMain strong {
+  font-size: 0.9rem;
+}
+
+.midGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.heatmap th[scope='row'] {
+  display: table-cell;
+  min-width: 190px;
+}
+
+.heatTitle {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--parchment-dim);
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+}
+
+.heatmap td {
+  text-align: center;
+}
+
+.heatCell {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--blocker);
+  color: #1a0a06;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.channelBars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.channelHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.barTrack {
+  display: block;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(246, 239, 228, 0.07);
+  overflow: hidden;
+}
+
+.barTrack i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--teal), var(--accent));
+}
+
+.teamPulse {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.teamPulse li {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(246, 239, 228, 0.08);
+}
+
+.teamPulse li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.teamCounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.draftBody {
+  margin: 0;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 1180px) {
+  .tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .topGrid,
+  .midGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .clarityList li {
+    flex-direction: column;
+  }
+}

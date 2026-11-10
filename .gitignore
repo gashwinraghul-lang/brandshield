@@ -1,0 +1,11 @@
+node_modules/
+node_modules_old/
+dist/
+.env
+.env.local
+data/*.db
+data/*.db-*
+data/uploads/
+coverage/
+*.log
+.DS_Store

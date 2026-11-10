@@ -1,0 +1,25 @@
+{
+  "name": "brandshield",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BrandShield.ai by Inkloom AI - AI brand-governance platform",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "start": "npm --workspace server run start",
+    "seed": "npm --workspace server run seed",
+    "create-admin": "npm --workspace server run create-admin",
+    "migrate": "npm --workspace server run migrate",
+    "test": "npm --workspace server run test",
+    "build": "npm --workspace client run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  }
+}
